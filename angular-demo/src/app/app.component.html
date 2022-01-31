@@ -1,0 +1,109 @@
+<br /><br />
+<div>
+  <button mat-raised-button color="primary" (click)="openAddEmployee()" *ngIf="!showAddEmployee">Add Employee </button>
+  <button mat-raised-button color="primary" (click)="openListEmployee()" *ngIf="showAddEmployee">List Employee </button>
+</div>
+<br />
+<br />
+<br />
+ <!-- <div hidden="true" *ngIf="!showAddEmployee">Text to show {{employees[0].firstName}}</div> -->
+
+<div *ngIf="!showAddEmployee">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Salary">
+      <th mat-header-cell *matHeaderCellDef> Salary </th>
+      <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Department">
+      <th mat-header-cell *matHeaderCellDef> Department </th>
+      <td mat-cell *matCellDef="let element"> {{element?.department?.departmentName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <button mat-raised-button color="primary" (click)="updateEmplpoyee(element)">Update </button>
+        <button mat-raised-button color="warn" (click)="deleteEmplpoyee(element, i)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<div id="comp-render" *ngIf="showAddEmployee">
+  <app-add-employee></app-add-employee>
+
+<!-- 
+<div>
+  <form #employeeForm="ngForm" class="example-form" (ngSubmit)="onSubmit()">
+
+    <div class="example-container">
+
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstNameInput" required
+          [minLength]="2" le>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" name="lsstNameInput" required
+          [minLength]="2">
+      </mat-form-field>
+
+    </div>
+
+    <div class="example-container">
+
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Email" [(ngModel)]="employee.email" name="emailInput"
+          pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput type="number" [(ngModel)]="employee.salary" placeholder="1" name="salaryInput">
+      </mat-form-field>
+
+    </div>
+
+    <div class="example-container">
+
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Phone Number" name="phoneNumberInput" pattern="^[0-9-]*"
+          [(ngModel)]="employee.phoneNumber">
+      </mat-form-field>
+
+    </div>
+
+
+    <button (click)="employeeForm.reset()" mat-raised-button color="primary">Reset Form</button>
+    <button type="submit" [disabled]="!employeeForm.form.valid" mat-raised-button color="primary">Submit</button>
+  </form>
+</div>
+-->
+
+<router-outlet></router-outlet>

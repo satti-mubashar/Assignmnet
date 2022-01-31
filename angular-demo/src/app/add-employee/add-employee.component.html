@@ -1,0 +1,67 @@
+<div>
+    <form #employeeForm="ngForm" class="example-form" (ngSubmit)="onSubmit()">
+  
+      <div class="example-container">
+  
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstNameInput" required
+            [minLength]="2">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" name="lsstNameInput" required
+            [minLength]="2">
+        </mat-form-field>
+  
+      </div>
+  
+      <div class="example-container">
+  
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Email" [(ngModel)]="employee.email" name="emailInput"
+            pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <input matInput type="number" [(ngModel)]="employee.salary" placeholder="1" name="salaryInput">
+        </mat-form-field>
+  
+      </div>
+  
+      <div class="example-container">
+  
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Phone Number" name="phoneNumberInput" pattern="^[0-9-]*"
+            [(ngModel)]="employee.phoneNumber">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Select Manager</mat-label>
+          <mat-select >
+            <mat-option></mat-option>
+            <mat-option *ngFor="let emp of employees" [value]="emp">
+              {{emp.firstName}} {{emp.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+      </div>
+
+      <div class="example-container">  
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Select Department</mat-label>
+          <mat-select >
+            <mat-option></mat-option>
+           <mat-option *ngFor="let dept of departments" [value]="dept">
+              {{dept.departmentName}} 
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+      </div>
+  
+  
+      <!-- <button (click)="employeeForm.reset()" mat-raised-button color="primary">Reset Form</button> -->
+      <button type="submit" [disabled]="!employeeForm.form.valid" mat-raised-button color="primary">Submit</button>
+    </form>
+  </div>
